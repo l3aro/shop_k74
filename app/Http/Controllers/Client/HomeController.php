@@ -8,7 +8,7 @@ use App\Http\Controllers\Controller;
 class HomeController extends Controller
 {
     public function index() {
-        return 'Trang chủ';
+        return view('client.index');
     }
 
     public function about() {
