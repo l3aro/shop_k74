@@ -60,6 +60,7 @@ Route::group([
         ], function() {
             Route::get('/', 'ProductController@index')->name('admin.product.index');
             Route::get('create', 'ProductController@create');
+            Route::post('/', 'ProductController@store');
             Route::get('{product}/edit', 'ProductController@edit');
         });
 

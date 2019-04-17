@@ -32,7 +32,7 @@
 										<use xlink:href="#stroked-checkmark"></use>
 									</svg>Đã thêm thành công<a href="#" class="pull-right"><span class="glyphicon glyphicon-remove"></span></a>
                             </div>
-                            <a href="addproduct.html" class="btn btn-primary">Thêm sản phẩm</a>
+                            <a href="/admin/products/create" class="btn btn-primary">Thêm sản phẩm</a>
                             <table class="table table-bordered" style="margin-top:20px;">
 
                                 <thead>
