@@ -58,7 +58,7 @@ Route::group([
         Route::group([
             'prefix' => 'products'
         ], function() {
-            Route::get('/', 'ProductController@index');
+            Route::get('/', 'ProductController@index')->name('admin.product.index');
             Route::get('create', 'ProductController@create');
             Route::get('{product}/edit', 'ProductController@edit');
         });
