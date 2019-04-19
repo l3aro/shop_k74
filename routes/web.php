@@ -62,6 +62,8 @@ Route::group([
             Route::get('create', 'ProductController@create');
             Route::post('/', 'ProductController@store');
             Route::get('{product}/edit', 'ProductController@edit');
+            Route::put('{product}', 'ProductController@update');
+            Route::delete('{product}', 'ProductController@destroy');
         });
 
         // Admin User routes

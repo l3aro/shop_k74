@@ -9,7 +9,10 @@ use App\Models\Product;
 class ProductController extends Controller
 {
     public function index() {
-        return view('admin.product.index');
+
+        $products = Product::paginate(7);
+
+        return view('admin.product.index', compact('products'));
     }
 
     public function create() {
@@ -44,5 +47,22 @@ class ProductController extends Controller
 
     public function edit(Product $product) {
         return view('admin.product.edit', compact('product'));
+    }
+
+    public function destroy(Product $product)
+    {
+        $product->delete();
+        return response()->json([], 204);
+    }
+
+    public function update(Product $product, Request $request) {
+        $product->name = $request->name;
+        $product->price = $request->price;
+        $product->highlight = $request->highlight;
+        $product->quantity = $request->quantity;
+        $product->description = $request->description;
+        $product->save();
+
+        return back();
     }
 }

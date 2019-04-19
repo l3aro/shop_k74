@@ -19,7 +19,9 @@
                 </div>    
                 @endif
                 
-                <form>
+                <form action="/admin/products/{{$product->id}}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    @method('PUT')
                     <div class="panel-body">
                         <div class="row" style="margin-bottom:40px">
 
@@ -60,8 +62,8 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Ảnh sản phẩm</label>
-                                    <input id="img" type="file" name="img" class="form-control hidden" onchange="changeImg(this)">
-                                    <img id="avatar" class="thumbnail" width="100%" height="350px" src="img/import-img.png">
+                                    <input id="img" type="file" name="avatar" class="form-control hidden" onchange="changeImg(this)">
+                                    <img id="avatar" class="thumbnail" width="100%" height="350px" src="{{asset('manage')}}/img/import-img.png">
                                 </div>
                             </div>
                         </div>
