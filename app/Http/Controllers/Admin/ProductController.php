@@ -55,7 +55,14 @@ class ProductController extends Controller
         return response()->json([], 204);
     }
 
-    public function update(Product $product, Request $request) {
+    public function update(Product $product, Request $request)
+    {
+        if ($request->hasFile('avatar')) {
+            $avatarName = \Illuminate\Support\Str::uuid('image') . '.' . $request->avatar->getClientOriginalExtension();
+            $request->avatar->move(public_path('media/product'),$avatarName);
+            $product->avatar = asset('media/product').'/'.$avatarName;
+        }
+
         $product->name = $request->name;
         $product->price = $request->price;
         $product->highlight = $request->highlight;

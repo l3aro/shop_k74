@@ -16,12 +16,11 @@
                     <svg class="glyph stroked checkmark">
                         <use xlink:href="#stroked-checkmark"></use>
                     </svg>Đã thêm thành công<a href="#" class="pull-right"><span class="glyphicon glyphicon-remove"></span></a>
-                </div>    
+                </div>
                 @endif
-                
+
                 <form action="/admin/products/{{$product->id}}" method="POST" enctype="multipart/form-data">
-                    @csrf
-                    @method('PUT')
+                    @csrf @method('PUT')
                     <div class="panel-body">
                         <div class="row" style="margin-bottom:40px">
 
@@ -63,7 +62,7 @@
                                 <div class="form-group">
                                     <label>Ảnh sản phẩm</label>
                                     <input id="img" type="file" name="avatar" class="form-control hidden" onchange="changeImg(this)">
-                                    <img id="avatar" class="thumbnail" width="100%" height="350px" src="{{asset('manage')}}/img/import-img.png">
+                                    <img id="avatar" class="thumbnail" width="100%" height="350px" src="{{$product->avatar&&$product->avatar!==''?$product->avatar:asset('manage').'/img/import-img.png'}}">
                                 </div>
                             </div>
                         </div>
