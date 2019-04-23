@@ -80,7 +80,11 @@ Route::group([
             'prefix' => 'categories'
         ], function () {
             Route::get('/', 'CategoryController@index');
+            Route::get('create', 'CategoryController@create');
+            Route::post('/', 'CategoryController@store');
             Route::get('{category}/edit', 'CategoryController@edit');
+            Route::put('{category}', 'CategoryController@update');
+            Route::delete('{category}', 'CategoryController@destroy');
         });
 
         // Admin Order routes
