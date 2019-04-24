@@ -60,7 +60,10 @@ Route::group([
         ], function() {
             Route::get('/', 'ProductController@index')->name('admin.product.index');
             Route::get('create', 'ProductController@create');
+            Route::post('/', 'ProductController@store');
             Route::get('{product}/edit', 'ProductController@edit');
+            Route::put('{product}', 'ProductController@update');
+            Route::delete('{product}', 'ProductController@destroy');
         });
 
         // Admin User routes
@@ -77,7 +80,11 @@ Route::group([
             'prefix' => 'categories'
         ], function () {
             Route::get('/', 'CategoryController@index');
+            Route::get('create', 'CategoryController@create');
+            Route::post('/', 'CategoryController@store');
             Route::get('{category}/edit', 'CategoryController@edit');
+            Route::put('{category}', 'CategoryController@update');
+            Route::delete('{category}', 'CategoryController@destroy');
         });
 
         // Admin Order routes
