@@ -15,7 +15,28 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return view('admin.category.index');
+        $categories = Category::where('parent_id', 0)->get()
+            ->map(function($query) {
+                $query->sub = $this->getChildCategories($query->id);
+                return $query;
+            });
+    
+        return view('admin.category.index', compact('categories'));
+    }
+
+    private function getChildCategories($parent_id)
+    {
+        $categories = Category::where('parent_id', $parent_id)->get();
+
+        if ($categories->count() > 0) {
+            $categories->map(function($query) {
+                $query->sub = $this->getChildCategories($query->id);
+                return $query;
+            });
+            return $categories;
+        }
+
+        return null;
     }
 
     /**
@@ -36,6 +57,10 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
+        if (Category::where('name', $request->name)->get()) {
+            return back()->with('conflict', 'Conflicted');
+        }
+
         $category = Category::create([
             'name' => $request->name,
             'parent_id' => $request->parent

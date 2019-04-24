@@ -28,7 +28,27 @@
                             <h3 style="margin: 0;"><strong>Phân cấp Menu</strong></h3>
                             <div class="vertical-menu">
                                 <div class="item-menu active">Danh mục </div>
-                                <div class="item-menu"><span>Nam</span>
+                                {{-- Start categories --}}
+                                @if ($categories->count() > 0)
+                                @foreach ($categories as $category)
+                                <div class="item-menu"><span>{{$category->name}}</span>
+                                    <div class="category-fix">
+                                        <a class="btn-category btn-primary" href="/admin/categories/{{$category->id}}/edit"><i
+                                                class="fa fa-edit"></i></a>
+                                        <a class="btn-category btn-danger" href="#"><i class="fas fa-times"></i></i></a>
+
+                                    </div>
+                                </div>
+                                @php 
+                                if (!is_null($category->sub)) {
+                                    printSubCategories($category->sub, 1);
+                                } 
+                                @endphp
+                                @endforeach
+                                @endif
+
+
+                                {{-- <div class="item-menu"><span>Nam</span>
                                     <div class="category-fix">
                                         <a class="btn-category btn-primary" href="editcategory.html"><i
                                                 class="fa fa-edit"></i></a>
@@ -67,8 +87,8 @@
                                         <a class="btn-category btn-danger" href="#"><i class="fas fa-times"></i></i></a>
 
                                     </div>
-                                </div>
-
+                                </div> --}}
+                                {{-- end categories --}}
                             </div>
                         </div>
                     </div>
@@ -82,3 +102,33 @@
     <!--/.row-->
 </div>
 @endsection
+
+@php
+    function printSubCategories($categories, $nth) 
+    {
+        foreach ($categories as $category) {
+            echo '
+            <div class="item-menu"><span>'.printMark($nth).$category->name.'</span>
+                <div class="category-fix">
+                    <a class="btn-category btn-primary" href="/admin/categories/'.$category->id.'/edit"><i
+                                                class="fa fa-edit"></i></a>
+                    <a class="btn-category btn-danger" href="#"><i class="fas fa-times"></i></i></a>
+
+                </div>
+            </div>
+            ';
+            if (!is_null($category->sub)) {
+                printSubCategories($category->sub, $nth+1);
+            }
+        }
+    }
+
+    function printMark($times)
+    {
+        $mark = '';
+        for ($i = 0; $i < $times; $i++) {
+            $mark .= '---|';
+        }
+        return $mark;
+    }
+@endphp

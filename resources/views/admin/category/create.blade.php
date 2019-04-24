@@ -49,7 +49,7 @@
                                 <div class="form-group">
                                     <label for="">Tên Danh mục</label>
                                     <input required type="text" class="form-control" name="name" placeholder="Tên danh mục mới">
-                                    @if (session()->has('danger'))
+                                    @if (session()->has('conflict'))
                                     <div class="alert bg-danger" role="alert">
                                         <svg class="glyph stroked cancel">
                                                 <use xlink:href="#stroked-cancel"></use>
