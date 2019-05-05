@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Client;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Cart;
+use App\Models\Order;
+use App\Models\OrderDetail;
 
 class CartController extends Controller
 {
@@ -14,7 +16,19 @@ class CartController extends Controller
     }
 
     public function checkout() {
-        return 'Thanh toán';
+        return view('client.checkout');
+    }
+
+    public function store(Request $request)
+    {
+        $order = Order::create($request->except('_token'));
+        $carts = Cart::getContent();
+        foreach ($carts as $key => $value) {
+            $order->order_details()->create([
+                'product_id' => $value->id,
+                'quantity' => $value->quantity
+            ]);
+        }
     }
 
     public function complete() {
