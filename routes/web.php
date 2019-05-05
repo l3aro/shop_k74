@@ -22,8 +22,14 @@ Route::group([
     Route::get('lien-he', 'HomeController@contact');
 
     Route::get('gio-hang', 'CartController@index');
+    Route::post('gio-hang', 'CartController@store');
     Route::get('gio-hang/thanh-toan', 'CartController@checkout');
     Route::get('gio-hang/thanh-cong', 'CartController@complete');
+    Route::post('/gio-hang/them', 'CartController@add');
+    Route::post('/gio-hang/sua', 'CartController@update');
+    Route::post('/gio-hang/xoa', 'CartController@remove');
+    
+
 
     Route::get('san-pham/{product}', 'ProductController@detail');
     Route::get('san-pham', 'ProductController@shop');

@@ -8,12 +8,15 @@ use App\Models\Product;
 
 class ProductController extends Controller
 {
-    public function detail(Product $product) {
+    public function detail(Product $product) 
+    {
         
-        return $product->name;
+        return view('client.product', compact('product'));
     }
 
-    public function shop() {
-        return 'Danh sách';
+    public function shop() 
+    {
+        $products = Product::paginate(12);
+        return view('client.shop', compact('products'));
     }
 }
